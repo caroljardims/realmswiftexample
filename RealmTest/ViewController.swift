@@ -43,9 +43,10 @@ class ViewController: UIViewController {
         let savedOnRealm = realm.objects(Dog.self)
         
         for s in savedOnRealm {
-            print("Here is " + s.name + ". My owner is " + (s.owner?.name)!)
-            for d in (s.owner?.dogs)!{
-                print(" " + (s.owner?.name)! + " has " + d.name)
+            guard let owner = s.owner else { break }
+            print("Here is " + s.name + ". My owner is " + owner.name)
+            for d in owner.dogs {
+                print(" " + owner.name + " has " + d.name)
             }
         }
     }
